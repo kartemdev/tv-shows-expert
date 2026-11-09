@@ -1,0 +1,40 @@
+{
+	"name": "tv-shows-expert",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "tsc && vite build",
+		"preview": "vite preview",
+		"typecheck": "tsc --noEmit",
+		"lint": "biome check .",
+		"lint:fix": "biome check --write .",
+		"check:lines": "node scripts/checkSourceLines.mjs",
+		"check": "pnpm lint && pnpm check:lines && pnpm typecheck",
+		"verify": "pnpm lint && pnpm check:lines && pnpm build"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"packageManager": "pnpm@10.33.0",
+	"engines": {
+		"node": "26.13.0"
+	},
+	"dependencies": {
+		"react": "^19.3.1",
+		"react-dom": "^19.3.1"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.6.6",
+		"@types/node": "^26.6.6",
+		"@types/react": "^19.3.0",
+		"@types/react-dom": "^19.3.0",
+		"@vitejs/plugin-react": "^6.2.1",
+		"esbuild": "^0.28.2",
+		"typescript": "^7.0.2",
+		"vite": "^8.3.6",
+		"vite-tsconfig-paths": "^6.1.1"
+	}
+}
