@@ -1,5 +1,6 @@
 {
 	"name": "tv-shows-expert",
+	"homepage": "https://kartemdev.github.io/tv-shows-expert/",
 	"version": "1.0.0",
 	"description": "",
 	"main": "index.js",
@@ -13,7 +14,9 @@
 		"lint:fix": "biome check --write .",
 		"check:lines": "node scripts/checkSourceLines.mjs",
 		"check": "pnpm lint && pnpm check:lines && pnpm typecheck",
-		"verify": "pnpm lint && pnpm check:lines && pnpm build"
+		"verify": "pnpm lint && pnpm check:lines && pnpm build",
+		"predeploy": "pnpm build",
+  	"gh-deploy": "gh-pages -d dist"
 	},
 	"keywords": [],
 	"author": "",
@@ -33,6 +36,7 @@
 		"@types/react-dom": "^19.3.0",
 		"@vitejs/plugin-react": "^6.2.1",
 		"esbuild": "^0.28.2",
+		"gh-pages": "^6.3.0",
 		"typescript": "^7.0.2",
 		"vite": "^8.3.6",
 		"vite-tsconfig-paths": "^6.1.1"
