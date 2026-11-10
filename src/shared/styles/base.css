@@ -1,0 +1,114 @@
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	font-family: var(--font-family-body);
+	line-height: var(--line-height-body);
+	-webkit-text-size-adjust: 100%;
+	text-size-adjust: 100%;
+}
+
+body {
+	min-width: 0;
+	margin: 0;
+	color: var(--color-text);
+	background-color: var(--color-bg);
+	font-size: var(--font-size-body);
+	font-weight: var(--font-weight-regular);
+	-webkit-font-smoothing: antialiased;
+}
+
+#root {
+	min-height: 100svh;
+	isolation: isolate;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+	margin: 0;
+	overflow-wrap: anywhere;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: var(--font-weight-medium);
+	line-height: var(--line-height-heading);
+}
+
+h1 {
+	font-size: var(--font-size-hero);
+}
+
+h2 {
+	font-size: var(--font-size-section);
+}
+
+h3 {
+	font-size: var(--font-size-card);
+}
+
+button,
+input,
+select,
+textarea {
+	color: inherit;
+	font: inherit;
+}
+
+button:not(:disabled) {
+	cursor: pointer;
+}
+
+button:disabled {
+	cursor: not-allowed;
+}
+
+img,
+svg {
+	display: block;
+	max-width: 100%;
+}
+
+img {
+	height: auto;
+}
+
+a {
+	color: inherit;
+	text-underline-offset: 0.2em;
+}
+
+:focus-visible {
+	outline: var(--focus-width) solid var(--color-focus);
+	outline-offset: var(--focus-offset);
+}
+
+::selection {
+	color: var(--color-on-action);
+	background-color: var(--color-action);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		/* biome-ignore lint/complexity/noImportantStyles: Настройка пользователя важнее локальных анимаций. */
+		animation: none !important;
+		/* biome-ignore lint/complexity/noImportantStyles: Настройка пользователя важнее локальных переходов. */
+		transition: none !important;
+		/* biome-ignore lint/complexity/noImportantStyles: Настройка пользователя важнее локальной прокрутки. */
+		scroll-behavior: auto !important;
+	}
+}
