@@ -14,6 +14,7 @@
 
 - [tv-component](.agents/skills/tv-component/SKILL.md) — изменение или добавление React-компонента и его Presenter.
 - [tv-architecture-review](.agents/skills/tv-architecture-review/SKILL.md) — ревью разделения ответственности и размещения компонентов.
+- [tv-design-review](.agents/skills/tv-design-review/SKILL.md) — сверка дизайн-спецификации, токенов и интерфейса с актуальным макетом и пользовательскими поправками.
 
 ## Инструменты и проверки
 
