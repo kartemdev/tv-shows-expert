@@ -1,0 +1,113 @@
+.container {
+	width: calc(100% - 2 * var(--content-gutter));
+	max-width: var(--content-max-width);
+	margin-inline: auto;
+}
+
+.intro {
+	display: grid;
+	grid-template-rows: auto 1fr;
+	min-height: max(760px, 100dvh);
+	background-image: var(--background-hero);
+}
+
+.header {
+	composes: container;
+	padding-block: var(--space-8);
+	border-bottom: var(--border-width) solid var(--color-border-subtle);
+}
+
+.brand {
+	display: flex;
+	align-items: center;
+	gap: var(--space-2);
+	width: fit-content;
+	color: var(--color-text);
+	font-size: var(--font-size-card);
+	font-weight: var(--font-weight-bold);
+	letter-spacing: var(--letter-spacing-heading);
+}
+
+.brand::after {
+	flex: 0 0 var(--space-2);
+	height: var(--space-2);
+	border-radius: var(--radius-pill);
+	background-color: var(--color-action);
+	content: "";
+}
+
+.content {
+	display: flex;
+	align-items: center;
+	padding-block: var(--space-20);
+}
+
+.kicker {
+	display: flex;
+	align-items: center;
+	gap: var(--space-3);
+	margin-bottom: var(--space-8);
+	color: var(--color-action);
+	font-size: var(--font-size-xs);
+	font-weight: var(--font-weight-bold);
+	letter-spacing: var(--letter-spacing-kicker);
+	text-transform: uppercase;
+}
+
+.kicker::before {
+	flex: 0 0 var(--space-6);
+	height: var(--border-width);
+	background-color: currentColor;
+	content: "";
+}
+
+.title {
+	font-weight: var(--font-weight-medium);
+	line-height: var(--line-height-hero);
+	letter-spacing: var(--letter-spacing-heading);
+}
+
+.title em {
+	color: var(--color-action);
+	font-family: var(--font-family-accent);
+	font-weight: var(--font-weight-medium);
+}
+
+.subtitle {
+	max-width: var(--text-max-width);
+	margin-top: var(--space-8);
+	color: var(--color-text-muted);
+}
+
+.hint {
+	max-width: var(--search-max-width);
+	margin-top: var(--space-10);
+	padding-top: var(--space-6);
+	border-top: var(--border-width) solid var(--color-border-subtle);
+	color: var(--color-text-muted);
+	font-size: var(--font-size-sm);
+}
+
+.hintTitle {
+	margin-bottom: var(--space-2);
+	color: var(--color-text);
+	font-weight: var(--font-weight-semibold);
+}
+
+@media (max-width: 720px) {
+	.intro {
+		min-height: 100dvh;
+	}
+
+	.header {
+		padding-block: var(--space-6);
+	}
+
+	.content {
+		padding-block: var(--space-16);
+	}
+
+	.kicker {
+		margin-bottom: var(--space-6);
+	}
+}

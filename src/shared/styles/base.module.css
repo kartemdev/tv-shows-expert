@@ -7,6 +7,8 @@
 html {
 	font-family: var(--font-family-body);
 	line-height: var(--line-height-body);
+	scrollbar-width: thin;
+	scrollbar-color: var(--color-action) var(--color-scrollbar-track);
 	-webkit-text-size-adjust: 100%;
 	text-size-adjust: 100%;
 }
@@ -19,11 +21,6 @@ body {
 	font-size: var(--font-size-body);
 	font-weight: var(--font-weight-regular);
 	-webkit-font-smoothing: antialiased;
-}
-
-#root {
-	min-height: 100svh;
-	isolation: isolate;
 }
 
 h1,

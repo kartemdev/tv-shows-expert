@@ -1,0 +1,8 @@
+@import "./tokens.module.css";
+@import "./colors.module.css";
+@import "./base.module.css";
+
+.root {
+	min-height: 100dvh;
+	isolation: isolate;
+}

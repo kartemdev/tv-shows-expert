@@ -41,6 +41,7 @@ export const SearchForm = () => {
 
 - Каждый компонент находится в собственной папке. Одна папка содержит одну пару View/Presenter и принадлежащие ей вспомогательные файлы.
 - Имя компонента, его папки и файла View совпадает и записывается в **PascalCase**: `ShowCard/ShowCard.tsx`.
+- Стили компонента — CSS Modules рядом с View, с тем же именем в **PascalCase**: `ShowCard.module.css`.
 - Presenter называется строго **`useShowCardPresenter`**, его файл — `useShowCardPresenter.ts`. Имя `usePresenter` без имени компонента не используется.
 - Остальные файлы и папки именуются в **camelCase**: `showSearch`, `normalizeShow.ts`, `showCardTypes.ts`. Имена вспомогательных функций и хуков также записываются в camelCase.
 - Вспомогательные хуки и функции располагаются рядом с владельцем. Логические помощники используются в Presenter; помощники JSX отвечают только за отображение и не возвращают логику во View.
