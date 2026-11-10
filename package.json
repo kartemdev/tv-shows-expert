@@ -15,8 +15,7 @@
 		"check:lines": "node scripts/checkSourceLines.mjs",
 		"check": "pnpm lint && pnpm check:lines && pnpm typecheck",
 		"verify": "pnpm lint && pnpm check:lines && pnpm build",
-		"predeploy": "pnpm build",
-  	"gh-deploy": "gh-pages -d dist"
+  	"gh-deploy": "pnpm build && gh-pages -d dist"
 	},
 	"keywords": [],
 	"author": "",
