@@ -20,14 +20,14 @@ Presenter сразу вызывается по правилам хуков: на
 Пример View:
 
 ```tsx
-export const SearchForm = () => {
-  const {onSubmit, query, onQueryChange, submitLabel} = useSearchFormPresenter();
+export const ContactForm = () => {
+  const {onSubmit, email, onEmailChange, submitLabel} = useContactFormPresenter();
 
   return (
     <form onSubmit={onSubmit}>
       <input
-        value={query}
-        onChange={onQueryChange}
+        value={email}
+        onChange={onEmailChange}
       />
       <button type="submit">{submitLabel}</button>
     </form>
@@ -40,10 +40,10 @@ export const SearchForm = () => {
 ## Именование и состав папки компонента
 
 - Каждый компонент находится в собственной папке. Одна папка содержит одну пару View/Presenter и принадлежащие ей вспомогательные файлы.
-- Имя компонента, его папки и файла View совпадает и записывается в **PascalCase**: `ShowCard/ShowCard.tsx`.
-- Стили компонента — CSS Modules рядом с View, с тем же именем в **PascalCase**: `ShowCard.module.css`.
-- Presenter называется строго **`useShowCardPresenter`**, его файл — `useShowCardPresenter.ts`. Имя `usePresenter` без имени компонента не используется.
-- Остальные файлы и папки именуются в **camelCase**: `showSearch`, `normalizeShow.ts`, `showCardTypes.ts`. Имена вспомогательных функций и хуков также записываются в camelCase.
+- Имя компонента, его папки и файла View совпадает и записывается в **PascalCase**: `ItemCard/ItemCard.tsx`.
+- Стили компонента — CSS Modules рядом с View, с тем же именем в **PascalCase**: `ItemCard.module.css`.
+- Presenter называется строго **`useItemCardPresenter`**, его файл — `useItemCardPresenter.ts`. Имя `usePresenter` без имени компонента не используется.
+- Остальные файлы и папки именуются в **camelCase**: `formatPrice.ts`, `itemCardTypes.ts`. Имена вспомогательных функций и хуков также записываются в camelCase.
 - Вспомогательные хуки и функции располагаются рядом с владельцем. Логические помощники используются в Presenter; помощники JSX отвечают только за отображение и не возвращают логику во View.
 
 ## Размер файлов и декомпозиция
@@ -58,37 +58,36 @@ export const SearchForm = () => {
 
 Компонент, используемый только одним родителем, располагается внутри папки этого родителя. Вложенность не ограничивается: дерево папок отражает реальные отношения компонентов.
 
-Переиспользуемые компоненты размещаются в **`components` ближайшей общей ветки всех потребителей**. Например, если компонент нужен нескольким потомкам `ShowSearch`, его место — `ShowSearch/components`. Потребители находятся ниже владельца этой ветки; внешние ветки не обращаются к её внутренним компонентам.
+Переиспользуемые компоненты размещаются в **`components` ближайшей общей ветки всех потребителей**. Например, если компонент нужен нескольким потомкам `Catalog`, его место — `Catalog/components`. Потребители находятся ниже владельца этой ветки; внешние ветки не обращаются к её внутренним компонентам.
 
 Компоненты, общие для разных страниц или независимых фич, располагаются в `src/shared/components`. Если появляется новый потребитель за пределами текущей ветки, компонент поднимается к ближайшему общему предку. Размещать его выше необходимого заранее не нужно.
 
-Пример структуры фичи:
+Пример дерева компонентов:
 
 ```text
 src/
-  features/
-    showSearch/
-      ShowSearch/
-        ShowSearch.tsx
-        useShowSearchPresenter.ts
-        SearchForm/
-          SearchForm.tsx
-          useSearchFormPresenter.ts
-        SearchResults/
-          SearchResults.tsx
-          useSearchResultsPresenter.ts
-          ShowCard/
-            ShowCard.tsx
-            useShowCardPresenter.ts
-            normalizeShow.ts
-            showCardTypes.ts
-        components/
-          ActionButton/
-            ActionButton.tsx
-            useActionButtonPresenter.ts
+  components/
+    Catalog/
+      Catalog.tsx
+      useCatalogPresenter.ts
+      Filters/
+        Filters.tsx
+        useFiltersPresenter.ts
+      ItemList/
+        ItemList.tsx
+        useItemListPresenter.ts
+        ItemCard/
+          ItemCard.tsx
+          useItemCardPresenter.ts
+          formatPrice.ts
+          itemCardTypes.ts
+      components/
+        ActionButton/
+          ActionButton.tsx
+          useActionButtonPresenter.ts
 ```
 
-Здесь `ShowCard` принадлежит `SearchResults`, а `ActionButton` используется в `SearchForm` и `SearchResults`, поэтому находится в `ShowSearch/components`.
+Здесь `ItemCard` принадлежит `ItemList`, а `ActionButton` используется в `Filters` и `ItemList`, поэтому находится в `Catalog/components`.
 
 ## Как дорабатывать фичу
 
