@@ -43,8 +43,10 @@
 
 		"paths": {
 			"@/pages/*": ["./src/pages/*"],
-			"@/features/*": ["./src/features/*"],
-			"@/shared/*": ["./src/shared/*"]
+			"@/components/*": ["./src/components/*"],
+			"@/shared/*": ["./src/shared/*"],
+			"@/api/*": ["./src/api/*"],
+			"@/model/*": ["./src/model/*"]
 		}
 	},
 	"include": ["src/**/*"]
