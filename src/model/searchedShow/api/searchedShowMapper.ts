@@ -1,5 +1,5 @@
 import type { TvMazeShowDto } from "@/api/searchShows";
-import type { SearchedShow } from "./types";
+import type { SearchedShow } from "../store";
 
 export const searchedShowMapper = (show: TvMazeShowDto): SearchedShow => ({
 	id: show.id,
