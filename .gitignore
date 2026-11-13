@@ -41,7 +41,9 @@ Desktop.ini
 
 # Специфичные файлы редакторов (VS Code, WebStorm)
 .idea/
-.vscode/
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
 *.suo
 *.ntvs*
 *.njsproj
