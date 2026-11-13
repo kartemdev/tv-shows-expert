@@ -1,0 +1,101 @@
+.announcement {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}
+
+.screen {
+	padding-block: var(--space-16) var(--space-20);
+	background-image: var(--background-results);
+}
+
+.content {
+	width: calc(100% - 2 * var(--content-gutter));
+	max-width: var(--content-max-width);
+	margin-inline: auto;
+}
+
+.kicker {
+	margin-bottom: var(--space-4);
+	color: var(--color-text-muted);
+	font-size: var(--font-size-xs);
+	font-weight: var(--font-weight-semibold);
+	letter-spacing: var(--letter-spacing-kicker);
+	text-transform: uppercase;
+}
+
+.heading {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: end;
+	justify-content: space-between;
+	gap: var(--space-6);
+}
+
+.title {
+	max-width: 20ch;
+	letter-spacing: var(--letter-spacing-heading);
+}
+
+.count,
+.query {
+	color: var(--color-text-muted);
+	font-size: var(--font-size-sm);
+}
+
+.query {
+	margin-top: var(--space-4);
+}
+
+.status {
+	margin-block: var(--space-6);
+}
+
+.grid {
+	display: grid;
+	grid-template-columns: repeat(var(--results-columns), minmax(0, 1fr));
+	gap: var(--results-gap);
+	margin: var(--space-8) 0 0;
+	padding: 0;
+	list-style: none;
+}
+
+.error {
+	display: grid;
+	margin-top: var(--space-6);
+	justify-items: start;
+	gap: var(--space-5);
+	padding: var(--space-6);
+	border: var(--border-width) solid var(--color-error);
+	color: var(--color-error);
+	background-color: var(--color-error-surface);
+}
+
+.retry {
+	min-height: var(--control-min-height);
+	padding: var(--space-3) var(--space-6);
+	border: var(--border-width) solid var(--color-on-action);
+	border-radius: var(--radius-control);
+	color: var(--color-on-action);
+	background-color: var(--color-action);
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-bold);
+	transition: background-color var(--motion-fast) var(--motion-easing);
+}
+
+.retry:hover {
+	background-color: var(--color-action-hover);
+}
+
+.retry:active {
+	background-color: var(--color-action-active);
+}
+
+@media (max-width: 720px) {
+	.screen {
+		padding-block: var(--space-12) var(--space-16);
+	}
+}

@@ -51,6 +51,8 @@
 	--focus-offset: 3px;
 	--motion-fast: 180ms;
 	--motion-enter: 240ms;
+	--motion-hero: 640ms;
+	--motion-hero-easing: cubic-bezier(0.333333, 1, 0.666667, 1);
 	--motion-easing: ease-out;
 }
 
@@ -73,5 +75,6 @@
 	:root {
 		--motion-fast: 0ms;
 		--motion-enter: 0ms;
+		--motion-hero: 0ms;
 	}
 }

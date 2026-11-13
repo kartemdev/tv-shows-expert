@@ -3,6 +3,7 @@ import type { SearchedShowAction, SearchedShowState } from "./types";
 export const initialSearchedShowState: SearchedShowState = {
 	query: "",
 	lastSubmittedQuery: "",
+	lastSuccessfulQuery: null,
 	shows: [],
 	status: "idle",
 	error: null,
@@ -20,13 +21,18 @@ export const searchedShowReducer = (
 			return {
 				...state,
 				lastSubmittedQuery: action.query,
-				shows: [],
 				status: "loading",
 				error: null,
 				hasSubmittedSearch: true,
 			};
 		case "searchSucceeded":
-			return { ...state, shows: action.shows, status: "success", error: null };
+			return {
+				...state,
+				shows: action.shows,
+				lastSuccessfulQuery: action.query,
+				status: "success",
+				error: null,
+			};
 		case "searchFailed":
 			return { ...state, status: "error", error: action.error };
 	}

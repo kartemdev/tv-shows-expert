@@ -42,7 +42,7 @@ export const useShowSearch = (dispatch: Dispatch<SearchedShowAction>) => {
 				);
 
 				if (isCurrentRequest()) {
-					dispatch({ type: "searchSucceeded", shows });
+					dispatch({ type: "searchSucceeded", query: submittedQuery, shows });
 				}
 			} catch (error) {
 				if (
