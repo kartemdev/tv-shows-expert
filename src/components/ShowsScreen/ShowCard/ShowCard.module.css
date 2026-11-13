@@ -1,0 +1,23 @@
+.card {
+	min-width: 0;
+	padding: var(--space-6);
+	border: var(--border-width) solid var(--color-border);
+	background-color: var(--color-surface);
+}
+
+.link {
+	display: block;
+	min-height: var(--target-min-size);
+	padding-block: var(--space-2);
+	transition: color var(--motion-fast) var(--motion-easing);
+}
+
+.link:hover {
+	color: var(--color-text-muted);
+}
+
+.source {
+	margin-top: var(--space-3);
+	color: var(--color-text-muted);
+	font-size: var(--font-size-sm);
+}

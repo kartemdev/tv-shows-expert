@@ -1,0 +1,30 @@
+.header {
+	width: calc(100% - 2 * var(--content-gutter));
+	max-width: var(--content-max-width);
+	margin-inline: auto;
+	padding-block: var(--space-8);
+	border-bottom: var(--border-width) solid var(--color-border-subtle);
+}
+
+.brand {
+	display: flex;
+	align-items: center;
+	gap: var(--space-2);
+	font-size: var(--font-size-card);
+	font-weight: var(--font-weight-bold);
+	letter-spacing: var(--letter-spacing-heading);
+}
+
+.brand::after {
+	flex: 0 0 var(--space-2);
+	height: var(--space-2);
+	border-radius: var(--radius-pill);
+	background-color: var(--color-action);
+	content: "";
+}
+
+@media (max-width: 720px) {
+	.header {
+		padding-block: var(--space-6);
+	}
+}

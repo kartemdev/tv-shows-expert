@@ -1,15 +1,19 @@
 import { useSearchedShowState } from "@/model/searchedShow";
+import styles from "./MainPageContent.module.css";
+import { useHeroTransition } from "./utils/heroTransition";
 
 export const useMainPageContentPresenter = () => {
 	const { hasSubmittedSearch } = useSearchedShowState();
+	const transition = useHeroTransition(hasSubmittedSearch);
 
 	return {
-		initialHint: hasSubmittedSearch
-			? null
-			: {
-					title: "Поиск скоро появится",
-					description:
-						"Начните с названия сериала: здесь можно будет найти истории по вкусу, выбрать жанр и посмотреть описание и рейтинг.",
-				},
+		showInitialSearch: !hasSubmittedSearch || transition.isTransitioning,
+		showResults: hasSubmittedSearch,
+		resultsClassName: hasSubmittedSearch ? styles.results : undefined,
+		introClassName: hasSubmittedSearch ? styles.compactIntro : styles.intro,
+		pageClassName: transition.isTransitioning
+			? styles.transitioning
+			: undefined,
+		...transition,
 	};
 };
