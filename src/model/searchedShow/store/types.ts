@@ -13,6 +13,7 @@ export type SearchedShowState = {
 	lastSubmittedQuery: string;
 	lastSuccessfulQuery: string | null;
 	shows: readonly SearchedShow[];
+	selectedGenre: string | null;
 	status: "idle" | "loading" | "success" | "error";
 	error: Error | null;
 	hasSubmittedSearch: boolean;
@@ -20,12 +21,16 @@ export type SearchedShowState = {
 
 export type SearchedShowAction =
 	| { type: "queryChanged"; query: string }
+	| { type: "genreSelected"; genre: string }
+	| { type: "genreReset" }
 	| { type: "searchStarted"; query: string }
 	| { type: "searchSucceeded"; query: string; shows: SearchedShow[] }
 	| { type: "searchFailed"; error: Error };
 
 export type SearchedShowActions = {
 	setQuery: (query: string) => void;
+	selectGenre: (genre: string) => void;
+	resetGenre: () => void;
 	submitSearch: () => Promise<void>;
 	retrySearch: () => Promise<void>;
 };

@@ -1,9 +1,12 @@
+import type { ReactNode } from "react";
 import { ShowCard } from "./ShowCard/ShowCard";
 import styles from "./ShowsScreen.module.css";
 import { ShowsSkeleton } from "./ShowsSkeleton/ShowsSkeleton";
 import { useShowsScreenPresenter } from "./useShowsScreenPresenter";
 
-export const ShowsScreen = () => {
+type Props = { children: ReactNode };
+
+export const ShowsScreen = ({ children }: Props) => {
 	const {
 		showResults,
 		queryLabel,
@@ -13,6 +16,9 @@ export const ShowsScreen = () => {
 		isLoading,
 		showSkeletons,
 		hasShows,
+		showFilterEmpty,
+		filterEmptyMessage,
+		onResetGenre,
 		errorMessage,
 		onRetry,
 		shows,
@@ -26,14 +32,14 @@ export const ShowsScreen = () => {
 			{showResults && (
 				<section className={styles.screen} aria-labelledby="results-title">
 					<div className={styles.content}>
-						<p className={styles.kicker}>Результаты поиска</p>
+						<h2 className={styles.kicker} id="results-title">
+							Результаты поиска
+						</h2>
 						<div className={styles.heading}>
-							<h2 className={styles.title} id="results-title">
-								Истории, которые стоят времени
-							</h2>
+							<p className={styles.query}>{queryLabel}</p>
 							<p className={styles.count}>{countLabel}</p>
 						</div>
-						<p className={styles.query}>{queryLabel}</p>
+						{children}
 						{visibleStatus && (
 							<p className={styles.status} aria-hidden="true">
 								{visibleStatus}
@@ -52,6 +58,18 @@ export const ShowsScreen = () => {
 							</div>
 						)}
 						<div aria-busy={isLoading}>
+							{showFilterEmpty && (
+								<div className={styles.filterEmpty}>
+									<p>{filterEmptyMessage}</p>
+									<button
+										className={styles.retry}
+										type="button"
+										onClick={onResetGenre}
+									>
+										Сбросить жанр
+									</button>
+								</div>
+							)}
 							{showSkeletons && <ShowsSkeleton />}
 							{hasShows && (
 								<ul className={styles.grid}>

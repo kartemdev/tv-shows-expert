@@ -1,13 +1,16 @@
 .grid {
 	display: grid;
 	grid-template-columns: repeat(var(--results-columns), minmax(0, 1fr));
+	justify-items: center;
 	gap: var(--results-gap);
-	margin-top: var(--space-8);
+	margin-top: var(--space-4);
 }
 
 .skeleton {
 	position: relative;
-	min-height: 9rem;
+	width: 100%;
+	max-width: var(--show-card-max-width);
+	min-height: var(--space-26);
 	overflow: hidden;
 	border: var(--border-width) solid var(--color-border-subtle);
 	background-color: var(--color-surface-muted);

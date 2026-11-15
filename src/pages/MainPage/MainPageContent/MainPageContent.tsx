@@ -1,3 +1,4 @@
+import { GenreTabs } from "@/components/GenreTabs/GenreTabs";
 import { InitialSearch } from "@/components/InitialSearch/InitialSearch";
 import { ResultsSearch } from "@/components/ResultsSearch/ResultsSearch";
 import { ShowsScreen } from "@/components/ShowsScreen/ShowsScreen";
@@ -45,7 +46,9 @@ export const MainPageContent = () => {
 					{showResults && (
 						<ResultsSearch panelRef={panelRef} inputRef={inputRef} />
 					)}
-					<ShowsScreen />
+					<ShowsScreen>
+						<GenreTabs />
+					</ShowsScreen>
 				</div>
 			</main>
 			<MainPageFooter />

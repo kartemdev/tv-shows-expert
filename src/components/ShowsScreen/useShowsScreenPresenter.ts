@@ -1,5 +1,6 @@
 import {
 	useSearchedShowActions,
+	useSearchedShowResults,
 	useSearchedShowState,
 } from "@/model/searchedShow";
 import { getSearchErrorMessage } from "./utils/getSearchErrorMessage";
@@ -7,37 +8,45 @@ import { getSearchErrorMessage } from "./utils/getSearchErrorMessage";
 export const useShowsScreenPresenter = () => {
 	const {
 		shows,
+		selectedGenre,
 		status,
 		error,
 		lastSubmittedQuery,
 		lastSuccessfulQuery,
 		hasSubmittedSearch,
 	} = useSearchedShowState();
-	const { retrySearch } = useSearchedShowActions();
+	const { retrySearch, resetGenre } = useSearchedShowActions();
+	const { filteredShows } = useSearchedShowResults();
 
 	const isLoading = status === "loading";
-	const isSuccess = status === "success";
 
 	const hasResults = lastSuccessfulQuery !== null;
-	const hasShows = shows.length > 0;
+	const hasShows = filteredShows.length > 0;
+	const showFilterEmpty = hasResults && shows.length > 0 && !hasShows;
 
 	const emptyMessage = "Ничего не найдено. Попробуйте другое название.";
-	const countLabel = hasResults ? `Найдено сериалов: ${shows.length}` : "";
+	const countLabel = hasResults
+		? `Найдено сериалов: ${filteredShows.length}`
+		: "";
+	const filterEmptyMessage = `Нет сериалов с жанром «${selectedGenre}».`;
+	const genreLabel = selectedGenre === null ? "" : ` Жанр: «${selectedGenre}».`;
 
 	let statusMessage = "";
 
 	if (isLoading) statusMessage = "Загрузка…";
 
-	if (isSuccess) {
-		statusMessage = shows.length
-			? `По запросу «${lastSubmittedQuery}» найдено сериалов: ${shows.length}.`
-			: emptyMessage;
+	if (hasResults && !isLoading) {
+		statusMessage = showFilterEmpty
+			? filterEmptyMessage
+			: hasShows
+				? `По запросу «${lastSuccessfulQuery}» найдено сериалов: ${filteredShows.length}.${genreLabel}`
+				: emptyMessage;
 	}
 
 	const visibleStatus = hasResults
-		? hasShows
-			? null
-			: emptyMessage
+		? shows.length === 0
+			? emptyMessage
+			: null
 		: statusMessage;
 
 	return {
@@ -49,8 +58,11 @@ export const useShowsScreenPresenter = () => {
 		isLoading,
 		showSkeletons: isLoading && !hasResults,
 		hasShows,
+		showFilterEmpty,
+		filterEmptyMessage,
+		onResetGenre: resetGenre,
 		errorMessage: status === "error" ? getSearchErrorMessage(error) : null,
 		onRetry: retrySearch,
-		shows,
+		shows: filteredShows,
 	};
 };
