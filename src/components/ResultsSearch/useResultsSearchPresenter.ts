@@ -1,12 +1,16 @@
-import { useSearchedShowState } from "@/model/searchedShow";
+import {
+	useSearchedShowResults,
+	useSearchedShowState,
+} from "@/model/searchedShow";
 
 export const useResultsSearchPresenter = () => {
-	const { lastSuccessfulQuery, shows } = useSearchedShowState();
+	const { lastSuccessfulQuery } = useSearchedShowState();
+	const { filteredShows } = useSearchedShowResults();
 
 	return {
 		countLabel:
 			lastSuccessfulQuery !== null
-				? `Найдено: ${shows.length}`
+				? `Найдено: ${filteredShows.length}`
 				: "Поиск сериалов",
 	};
 };

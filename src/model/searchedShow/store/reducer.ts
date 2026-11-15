@@ -5,6 +5,7 @@ export const initialSearchedShowState: SearchedShowState = {
 	lastSubmittedQuery: "",
 	lastSuccessfulQuery: null,
 	shows: [],
+	selectedGenre: null,
 	status: "idle",
 	error: null,
 	hasSubmittedSearch: false,
@@ -17,10 +18,15 @@ export const searchedShowReducer = (
 	switch (action.type) {
 		case "queryChanged":
 			return { ...state, query: action.query };
+		case "genreSelected":
+			return { ...state, selectedGenre: action.genre };
+		case "genreReset":
+			return { ...state, selectedGenre: null };
 		case "searchStarted":
 			return {
 				...state,
 				lastSubmittedQuery: action.query,
+				selectedGenre: null,
 				status: "loading",
 				error: null,
 				hasSubmittedSearch: true,

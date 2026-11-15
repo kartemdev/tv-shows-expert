@@ -1,6 +1,7 @@
 export {
 	SearchedShowProvider,
 	useSearchedShowActions,
+	useSearchedShowResults,
 	useSearchedShowState,
 } from "./context";
 

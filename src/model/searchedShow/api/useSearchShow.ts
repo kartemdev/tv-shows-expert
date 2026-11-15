@@ -1,17 +1,25 @@
 import { type Dispatch, useCallback, useEffect, useRef } from "react";
 import { searchShows } from "@/api/searchShows";
-import type { SearchedShowAction } from "../store";
+import type { SearchedShowAction, SearchedShowState } from "../store";
 import { searchedShowMapper } from "./searchedShowMapper";
 
-export const useShowSearch = (dispatch: Dispatch<SearchedShowAction>) => {
-	const activeController = useRef<AbortController | null>(null);
+type SearchState = Pick<SearchedShowState, "lastSubmittedQuery" | "status">;
+
+export const useShowSearch = (
+	dispatch: Dispatch<SearchedShowAction>,
+	{ lastSubmittedQuery, status }: SearchState,
+) => {
+	const activeRequest = useRef<{
+		query: string;
+		controller: AbortController;
+	} | null>(null);
 	const activeRequestId = useRef(0);
 
 	useEffect(() => {
 		return () => {
 			activeRequestId.current += 1;
-			activeController.current?.abort();
-			activeController.current = null;
+			activeRequest.current?.controller.abort();
+			activeRequest.current = null;
 		};
 	}, []);
 
@@ -19,15 +27,21 @@ export const useShowSearch = (dispatch: Dispatch<SearchedShowAction>) => {
 		async (query: string) => {
 			const submittedQuery = query.trim();
 
-			if (!submittedQuery) {
+			if (
+				!submittedQuery ||
+				activeRequest.current?.query === submittedQuery ||
+				(!activeRequest.current &&
+					status === "success" &&
+					submittedQuery === lastSubmittedQuery)
+			) {
 				return;
 			}
 
 			const requestId = ++activeRequestId.current;
-			activeController.current?.abort();
+			activeRequest.current?.controller.abort();
 
 			const controller = new AbortController();
-			activeController.current = controller;
+			activeRequest.current = { query: submittedQuery, controller };
 
 			const isCurrentRequest = () =>
 				activeRequestId.current === requestId && !controller.signal.aborted;
@@ -61,10 +75,10 @@ export const useShowSearch = (dispatch: Dispatch<SearchedShowAction>) => {
 				}
 			} finally {
 				if (activeRequestId.current === requestId) {
-					activeController.current = null;
+					activeRequest.current = null;
 				}
 			}
 		},
-		[dispatch],
+		[dispatch, lastSubmittedQuery, status],
 	);
 };
