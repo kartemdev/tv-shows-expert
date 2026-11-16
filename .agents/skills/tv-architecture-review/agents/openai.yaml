@@ -1,3 +1,0 @@
-interface:
-  display_name: "Ревью архитектуры"
-  short_description: "Проверка View, Presenter и дерева компонентов"
