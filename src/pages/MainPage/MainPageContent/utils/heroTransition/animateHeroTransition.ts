@@ -5,9 +5,12 @@ export const animateHeroTransition = (
 	origin: Origin,
 	onFinish: () => void,
 ) => {
-	const duration = Number.parseFloat(
-		getComputedStyle(hero).getPropertyValue("--motion-hero"),
-	);
+	const durationValue = getComputedStyle(hero)
+		.getPropertyValue("--motion-hero")
+		.trim();
+	const durationMs =
+		Number.parseFloat(durationValue) *
+		(durationValue.endsWith("ms") ? 1 : 1000);
 	const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 	const startedAt = performance.now();
 
@@ -29,9 +32,9 @@ export const animateHeroTransition = (
 
 	const animate = (now: number) => {
 		const progress =
-			reducedMotion.matches || !duration
+			reducedMotion.matches || !durationMs
 				? 1
-				: Math.min(Math.max(now - startedAt, 0) / duration, 1);
+				: Math.min(Math.max(now - startedAt, 0) / durationMs, 1);
 
 		const easedProgress = 1 - (1 - progress) ** 3;
 
