@@ -1,0 +1,3 @@
+interface:
+  display_name: "Refactor Skills"
+  short_description: "Make existing skills portable and concise"
