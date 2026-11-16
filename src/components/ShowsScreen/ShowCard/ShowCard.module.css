@@ -60,6 +60,15 @@
 	font-size: var(--font-size-sm);
 }
 
+.summary {
+	display: -webkit-box;
+	height: calc(4em * var(--line-height-body));
+	overflow: hidden;
+	line-height: var(--line-height-body);
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 4;
+}
+
 @keyframes appear {
 	from {
 		opacity: 0;

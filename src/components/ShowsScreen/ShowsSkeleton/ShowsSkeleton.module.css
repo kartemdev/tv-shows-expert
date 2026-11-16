@@ -10,7 +10,7 @@
 	position: relative;
 	width: 100%;
 	max-width: var(--show-card-max-width);
-	min-height: var(--space-26);
+	aspect-ratio: var(--poster-aspect-ratio);
 	overflow: hidden;
 	border: var(--border-width) solid var(--color-border-subtle);
 	background-color: var(--color-surface-muted);

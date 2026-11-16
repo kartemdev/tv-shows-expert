@@ -16,7 +16,8 @@ export const useShowsScreenPresenter = () => {
 		hasSubmittedSearch,
 	} = useSearchedShowState();
 	const { retrySearch, resetGenre } = useSearchedShowActions();
-	const { filteredShows } = useSearchedShowResults();
+	const { filteredShows, pageShows, page, pageCount } =
+		useSearchedShowResults();
 
 	const isLoading = status === "loading";
 
@@ -39,7 +40,7 @@ export const useShowsScreenPresenter = () => {
 		statusMessage = showFilterEmpty
 			? filterEmptyMessage
 			: hasShows
-				? `По запросу «${lastSuccessfulQuery}» найдено сериалов: ${filteredShows.length}.${genreLabel}`
+				? `По запросу «${lastSuccessfulQuery}» найдено сериалов: ${filteredShows.length}.${genreLabel} Страница ${page} из ${pageCount}.`
 				: emptyMessage;
 	}
 
@@ -63,6 +64,6 @@ export const useShowsScreenPresenter = () => {
 		onResetGenre: resetGenre,
 		errorMessage: status === "error" ? getSearchErrorMessage(error) : null,
 		onRetry: retrySearch,
-		shows: filteredShows,
+		shows: pageShows,
 	};
 };
