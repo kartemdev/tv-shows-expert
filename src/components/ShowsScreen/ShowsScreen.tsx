@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { Pagination } from "./Pagination/Pagination";
 import { ShowCard } from "./ShowCard/ShowCard";
 import styles from "./ShowsScreen.module.css";
 import { ShowsSkeleton } from "./ShowsSkeleton/ShowsSkeleton";
@@ -79,6 +80,7 @@ export const ShowsScreen = ({ children }: Props) => {
 								</ul>
 							)}
 						</div>
+						<Pagination />
 					</div>
 				</section>
 			)}

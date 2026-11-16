@@ -1,9 +1,9 @@
 import { useMemo } from "react";
-import { filterShowsByGenre, getShowGenres } from "../selectors";
+import { filterShowsByGenre, getShowGenres, paginateShows } from "../selectors";
 import { useSearchedShowState } from "./useSearchedShowState";
 
 export const useSearchedShowResults = () => {
-	const { shows, selectedGenre } = useSearchedShowState();
+	const { shows, selectedGenre, page } = useSearchedShowState();
 
 	const genres = useMemo(() => getShowGenres(shows), [shows]);
 
@@ -12,5 +12,10 @@ export const useSearchedShowResults = () => {
 		[shows, selectedGenre],
 	);
 
-	return { genres, filteredShows };
+	const pagination = useMemo(
+		() => paginateShows(filteredShows, page),
+		[filteredShows, page],
+	);
+
+	return { genres, filteredShows, ...pagination };
 };

@@ -1,3 +1,8 @@
+import {
+	clampShowsPage,
+	filterShowsByGenre,
+	getShowsPageCount,
+} from "../selectors";
 import type { SearchedShowAction, SearchedShowState } from "./types";
 
 export const initialSearchedShowState: SearchedShowState = {
@@ -6,6 +11,7 @@ export const initialSearchedShowState: SearchedShowState = {
 	lastSuccessfulQuery: null,
 	shows: [],
 	selectedGenre: null,
+	page: 1,
 	status: "idle",
 	error: null,
 	hasSubmittedSearch: false,
@@ -19,14 +25,24 @@ export const searchedShowReducer = (
 		case "queryChanged":
 			return { ...state, query: action.query };
 		case "genreSelected":
-			return { ...state, selectedGenre: action.genre };
+			return { ...state, selectedGenre: action.genre, page: 1 };
 		case "genreReset":
-			return { ...state, selectedGenre: null };
+			return { ...state, selectedGenre: null, page: 1 };
+		case "pageChanged": {
+			if (state.status !== "success") return state;
+
+			const count = filterShowsByGenre(state.shows, state.selectedGenre).length;
+			return {
+				...state,
+				page: clampShowsPage(action.page, getShowsPageCount(count)),
+			};
+		}
 		case "searchStarted":
 			return {
 				...state,
 				lastSubmittedQuery: action.query,
 				selectedGenre: null,
+				page: 1,
 				status: "loading",
 				error: null,
 				hasSubmittedSearch: true,

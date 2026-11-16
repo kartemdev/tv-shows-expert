@@ -23,6 +23,10 @@ export const useSearchedShowStore = () => {
 		dispatch({ type: "genreReset" });
 	}, []);
 
+	const setPage = useCallback((page: number) => {
+		dispatch({ type: "pageChanged", page });
+	}, []);
+
 	const submitSearch = useCallback(
 		() => runSearch(state.query),
 		[runSearch, state.query],
@@ -34,8 +38,15 @@ export const useSearchedShowStore = () => {
 	);
 
 	const actions = useMemo<SearchedShowActions>(
-		() => ({ setQuery, selectGenre, resetGenre, submitSearch, retrySearch }),
-		[setQuery, selectGenre, resetGenre, submitSearch, retrySearch],
+		() => ({
+			setQuery,
+			selectGenre,
+			resetGenre,
+			setPage,
+			submitSearch,
+			retrySearch,
+		}),
+		[setQuery, selectGenre, resetGenre, setPage, submitSearch, retrySearch],
 	);
 
 	return { state, actions };

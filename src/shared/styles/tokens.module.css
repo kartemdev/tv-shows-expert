@@ -41,9 +41,9 @@
 	--target-min-size: 2.75rem;
 	--search-height: 4rem;
 	--icon-size: 1.25rem;
-	--results-columns: 4;
+	--results-columns: 3;
 	--results-gap: var(--space-4);
-	--show-card-max-width: 16rem;
+	--show-card-max-width: 18rem;
 	--poster-aspect-ratio: 2 / 3;
 	--radius-control: 0.125rem;
 	--radius-pill: 999px;
@@ -59,7 +59,7 @@
 
 @media (max-width: 1050px) {
 	:root {
-		--results-columns: 3;
+		--results-columns: 2;
 	}
 }
 
