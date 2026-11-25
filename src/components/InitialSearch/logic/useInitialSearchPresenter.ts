@@ -4,17 +4,18 @@ import {
 	type KeyboardEvent,
 	useRef,
 } from "react";
-import {
-	useSearchedShowActions,
-	useSearchedShowState,
-} from "@/model/searchedShow";
-import styles from "./InitialSearch.module.css";
+import { useSearchedShowStore } from "@/model/searchedShow";
+import styles from "../InitialSearch.module.css";
 
 export const useInitialSearchPresenter = (
 	onAcceptedSubmit: (fromKeyboard: boolean) => void,
 ) => {
-	const { query, status, hasSubmittedSearch } = useSearchedShowState();
-	const { setQuery, submitSearch } = useSearchedShowActions();
+	const query = useSearchedShowStore((state) => state.query);
+	const status = useSearchedShowStore((state) => state.status);
+	const hasSubmittedSearch = useSearchedShowStore(
+		(state) => state.hasSubmittedSearch,
+	);
+	const setQuery = useSearchedShowStore((state) => state.setQuery);
 
 	const fromKeyboard = useRef(false);
 
@@ -43,7 +44,6 @@ export const useInitialSearchPresenter = (
 		}
 
 		onAcceptedSubmit(fromKeyboard.current);
-		void submitSearch();
 	};
 
 	return {

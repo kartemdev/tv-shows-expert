@@ -20,20 +20,12 @@ export type SearchedShowState = {
 	hasSubmittedSearch: boolean;
 };
 
-export type SearchedShowAction =
-	| { type: "queryChanged"; query: string }
-	| { type: "genreSelected"; genre: string }
-	| { type: "genreReset" }
-	| { type: "pageChanged"; page: number }
-	| { type: "searchStarted"; query: string }
-	| { type: "searchSucceeded"; query: string; shows: SearchedShow[] }
-	| { type: "searchFailed"; error: Error };
-
 export type SearchedShowActions = {
 	setQuery: (query: string) => void;
 	selectGenre: (genre: string) => void;
 	resetGenre: () => void;
 	setPage: (page: number) => void;
-	submitSearch: () => Promise<void>;
-	retrySearch: () => Promise<void>;
+	startSearch: (query: string) => void;
+	completeSearch: (query: string, shows: SearchedShow[]) => void;
+	failSearch: (error: Error) => void;
 };

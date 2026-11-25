@@ -1,21 +1,26 @@
 import {
-	useSearchedShowActions,
 	useSearchedShowResults,
-	useSearchedShowState,
+	useSearchedShowStore,
 } from "@/model/searchedShow";
-import { getSearchErrorMessage } from "./utils/getSearchErrorMessage";
+import { getSearchErrorMessage } from "./getSearchErrorMessage";
 
 export const useShowsScreenPresenter = () => {
-	const {
-		shows,
-		selectedGenre,
-		status,
-		error,
-		lastSubmittedQuery,
-		lastSuccessfulQuery,
-		hasSubmittedSearch,
-	} = useSearchedShowState();
-	const { retrySearch, resetGenre } = useSearchedShowActions();
+	const hasUnfilteredShows = useSearchedShowStore(
+		(state) => state.shows.length > 0,
+	);
+	const selectedGenre = useSearchedShowStore((state) => state.selectedGenre);
+	const status = useSearchedShowStore((state) => state.status);
+	const error = useSearchedShowStore((state) => state.error);
+	const lastSubmittedQuery = useSearchedShowStore(
+		(state) => state.lastSubmittedQuery,
+	);
+	const lastSuccessfulQuery = useSearchedShowStore(
+		(state) => state.lastSuccessfulQuery,
+	);
+	const hasSubmittedSearch = useSearchedShowStore(
+		(state) => state.hasSubmittedSearch,
+	);
+	const resetGenre = useSearchedShowStore((state) => state.resetGenre);
 	const { filteredShows, pageShows, page, pageCount } =
 		useSearchedShowResults();
 
@@ -23,7 +28,7 @@ export const useShowsScreenPresenter = () => {
 
 	const hasResults = lastSuccessfulQuery !== null;
 	const hasShows = filteredShows.length > 0;
-	const showFilterEmpty = hasResults && shows.length > 0 && !hasShows;
+	const showFilterEmpty = hasResults && hasUnfilteredShows && !hasShows;
 
 	const emptyMessage = "Ничего не найдено. Попробуйте другое название.";
 	const countLabel = hasResults
@@ -45,9 +50,9 @@ export const useShowsScreenPresenter = () => {
 	}
 
 	const visibleStatus = hasResults
-		? shows.length === 0
-			? emptyMessage
-			: null
+		? hasUnfilteredShows
+			? null
+			: emptyMessage
 		: statusMessage;
 
 	return {
@@ -63,7 +68,6 @@ export const useShowsScreenPresenter = () => {
 		filterEmptyMessage,
 		onResetGenre: resetGenre,
 		errorMessage: status === "error" ? getSearchErrorMessage(error) : null,
-		onRetry: retrySearch,
 		shows: pageShows,
 	};
 };

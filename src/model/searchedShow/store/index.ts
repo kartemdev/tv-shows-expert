@@ -1,8 +1,2 @@
-export type {
-	SearchedShow,
-	SearchedShowAction,
-	SearchedShowActions,
-	SearchedShowState,
-} from "./types";
-
+export type { SearchedShow } from "./types";
 export { useSearchedShowStore } from "./useSearchedShowStore";

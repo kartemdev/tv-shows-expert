@@ -1,5 +1,5 @@
 import styles from "./GenreChip.module.css";
-import { useGenreChipPresenter } from "./useGenreChipPresenter";
+import { useGenreChipPresenter } from "./logic/useGenreChipPresenter";
 
 type Props = { genre: string | null; label: string };
 

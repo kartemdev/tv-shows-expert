@@ -1,13 +1,13 @@
 import type { ReactNode } from "react";
+import { useShowsScreenPresenter } from "./logic/useShowsScreenPresenter";
 import { Pagination } from "./Pagination/Pagination";
 import { ShowCard } from "./ShowCard/ShowCard";
 import styles from "./ShowsScreen.module.css";
 import { ShowsSkeleton } from "./ShowsSkeleton/ShowsSkeleton";
-import { useShowsScreenPresenter } from "./useShowsScreenPresenter";
 
-type Props = { children: ReactNode };
+type Props = { children: ReactNode; onRetry: () => void };
 
-export const ShowsScreen = ({ children }: Props) => {
+export const ShowsScreen = ({ children, onRetry }: Props) => {
 	const {
 		showResults,
 		queryLabel,
@@ -21,7 +21,6 @@ export const ShowsScreen = ({ children }: Props) => {
 		filterEmptyMessage,
 		onResetGenre,
 		errorMessage,
-		onRetry,
 		shows,
 	} = useShowsScreenPresenter();
 

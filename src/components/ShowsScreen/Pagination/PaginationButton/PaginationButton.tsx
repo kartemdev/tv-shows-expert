@@ -1,4 +1,4 @@
-import { usePaginationButtonPresenter } from "./usePaginationButtonPresenter";
+import { usePaginationButtonPresenter } from "./logic/usePaginationButtonPresenter";
 
 type Props = {
 	page: number;

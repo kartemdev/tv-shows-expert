@@ -1,6 +1,6 @@
 import { GenreChip } from "./GenreChip/GenreChip";
 import styles from "./GenreTabs.module.css";
-import { useGenreTabsPresenter } from "./useGenreTabsPresenter";
+import { useGenreTabsPresenter } from "./logic/useGenreTabsPresenter";
 
 export const GenreTabs = () => {
 	const { options, showGenres, showUnavailable } = useGenreTabsPresenter();

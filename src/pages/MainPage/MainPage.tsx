@@ -1,10 +1,63 @@
-import { SearchedShowProvider } from "@/model/searchedShow";
-import { MainPageContent } from "./MainPageContent/MainPageContent";
+import { GenreTabs } from "@/components/GenreTabs/GenreTabs";
+import { InitialSearch } from "@/components/InitialSearch/InitialSearch";
+import { ResultsSearch } from "@/components/ResultsSearch/ResultsSearch";
+import { ShowsScreen } from "@/components/ShowsScreen/ShowsScreen";
+import { useMainPagePresenter } from "./logic/useMainPagePresenter";
+import styles from "./MainPage.module.css";
+import { MainPageFooter } from "./MainPageFooter/MainPageFooter";
+import { MainPageHeader } from "./MainPageHeader/MainPageHeader";
 
 export const MainPage = () => {
+	const {
+		showInitialSearch,
+		showResults,
+		resultsClassName,
+		introClassName,
+		pageClassName,
+		heroRef,
+		panelRef,
+		inputRef,
+		onInitialSubmit,
+		onSubmitSearch,
+		onRetrySearch,
+	} = useMainPagePresenter();
+
 	return (
-		<SearchedShowProvider>
-			<MainPageContent />
-		</SearchedShowProvider>
+		<div id="top" className={pageClassName}>
+			<main>
+				<div className={introClassName} data-theme="dark" ref={heroRef}>
+					<MainPageHeader />
+					<div className={styles.content}>
+						<div className={styles.container}>
+							<p className={styles.kicker}>Время найти свою историю</p>
+							<h1 className={styles.title}>
+								Сериал на <em>вечер?</em>
+								<br />
+								Мы поможем найти.
+							</h1>
+							<p className={styles.subtitle}>
+								Тщательно отобранные истории для любого настроения
+							</p>
+							{showInitialSearch && (
+								<InitialSearch onAcceptedSubmit={onInitialSubmit} />
+							)}
+						</div>
+					</div>
+				</div>
+				<div className={resultsClassName}>
+					{showResults && (
+						<ResultsSearch
+							panelRef={panelRef}
+							inputRef={inputRef}
+							onSubmitSearch={onSubmitSearch}
+						/>
+					)}
+					<ShowsScreen onRetry={onRetrySearch}>
+						<GenreTabs />
+					</ShowsScreen>
+				</div>
+			</main>
+			<MainPageFooter />
+		</div>
 	);
 };

@@ -1,8 +1,8 @@
+export { searchedShowMapper } from "./api";
 export {
-	SearchedShowProvider,
-	useSearchedShowActions,
+	useSearchedShowCount,
+	useSearchedShowGenres,
 	useSearchedShowResults,
-	useSearchedShowState,
-} from "./context";
+} from "./hooks/useSearchedShowResults";
 
-export type { SearchedShow } from "./store";
+export { type SearchedShow, useSearchedShowStore } from "./store";

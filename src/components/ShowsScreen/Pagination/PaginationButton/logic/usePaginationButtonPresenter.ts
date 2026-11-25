@@ -1,11 +1,11 @@
-import { useSearchedShowActions } from "@/model/searchedShow";
-import styles from "./PaginationButton.module.css";
+import { useSearchedShowStore } from "@/model/searchedShow";
+import styles from "../PaginationButton.module.css";
 
 export const usePaginationButtonPresenter = (
 	page: number,
 	isCurrent: boolean,
 ) => {
-	const { setPage } = useSearchedShowActions();
+	const setPage = useSearchedShowStore((state) => state.setPage);
 
 	const onClick = () => setPage(page);
 
