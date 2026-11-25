@@ -1,6 +1,6 @@
+import { usePaginationPresenter } from "./logic/usePaginationPresenter";
 import styles from "./Pagination.module.css";
 import { PaginationButton } from "./PaginationButton/PaginationButton";
-import { usePaginationPresenter } from "./usePaginationPresenter";
 
 export const Pagination = () => {
 	const { isVisible, buttons } = usePaginationPresenter();

@@ -1,14 +1,19 @@
 import type { Ref } from "react";
+import { useResultsSearchPresenter } from "./logic/useResultsSearchPresenter";
 import styles from "./ResultsSearch.module.css";
 import { ResultsSearchForm } from "./ResultsSearchForm/ResultsSearchForm";
-import { useResultsSearchPresenter } from "./useResultsSearchPresenter";
 
 type Props = {
 	panelRef: Ref<HTMLElement>;
 	inputRef: Ref<HTMLInputElement>;
+	onSubmitSearch: () => void;
 };
 
-export const ResultsSearch = ({ panelRef, inputRef }: Props) => {
+export const ResultsSearch = ({
+	panelRef,
+	inputRef,
+	onSubmitSearch,
+}: Props) => {
 	const { countLabel } = useResultsSearchPresenter();
 
 	return (
@@ -21,7 +26,10 @@ export const ResultsSearch = ({ panelRef, inputRef }: Props) => {
 				>
 					TV<span aria-hidden="true">•</span>
 				</a>
-				<ResultsSearchForm inputRef={inputRef} />
+				<ResultsSearchForm
+					inputRef={inputRef}
+					onSubmitSearch={onSubmitSearch}
+				/>
 				<p className={styles.count}>{countLabel}</p>
 			</div>
 		</section>

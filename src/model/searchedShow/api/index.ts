@@ -1,1 +1,1 @@
-export { useShowSearch } from "./useSearchShow";
+export { searchedShowMapper } from "./searchedShowMapper";

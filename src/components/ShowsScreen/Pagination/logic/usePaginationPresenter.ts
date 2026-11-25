@@ -1,10 +1,12 @@
 import {
 	useSearchedShowResults,
-	useSearchedShowState,
+	useSearchedShowStore,
 } from "@/model/searchedShow";
 
 export const usePaginationPresenter = () => {
-	const { status } = useSearchedShowState();
+	const searchSucceeded = useSearchedShowStore(
+		(state) => state.status === "success",
+	);
 	const { page, pageCount } = useSearchedShowResults();
 
 	const buttons = [
@@ -31,5 +33,5 @@ export const usePaginationPresenter = () => {
 		},
 	];
 
-	return { isVisible: status === "success" && pageCount > 1, buttons };
+	return { isVisible: searchSucceeded && pageCount > 1, buttons };
 };

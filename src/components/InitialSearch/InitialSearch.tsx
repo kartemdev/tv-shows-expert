@@ -1,5 +1,5 @@
 import styles from "./InitialSearch.module.css";
-import { useInitialSearchPresenter } from "./useInitialSearchPresenter";
+import { useInitialSearchPresenter } from "./logic/useInitialSearchPresenter";
 
 type Props = {
 	onAcceptedSubmit: (fromKeyboard: boolean) => void;

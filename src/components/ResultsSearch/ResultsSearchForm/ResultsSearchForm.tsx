@@ -1,12 +1,15 @@
 import type { Ref } from "react";
+import { useResultsSearchFormPresenter } from "./logic/useResultsSearchFormPresenter";
 import styles from "./ResultsSearchForm.module.css";
-import { useResultsSearchFormPresenter } from "./useResultsSearchFormPresenter";
 
-type Props = { inputRef: Ref<HTMLInputElement> };
+type Props = {
+	inputRef: Ref<HTMLInputElement>;
+	onSubmitSearch: () => void;
+};
 
-export const ResultsSearchForm = ({ inputRef }: Props) => {
+export const ResultsSearchForm = ({ inputRef, onSubmitSearch }: Props) => {
 	const { query, onChange, onSubmit, loadingLabel } =
-		useResultsSearchFormPresenter();
+		useResultsSearchFormPresenter(onSubmitSearch);
 
 	return (
 		<search className={styles.search} aria-label="Поиск сериалов">

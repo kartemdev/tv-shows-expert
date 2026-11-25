@@ -1,5 +1,5 @@
+import { useMainPageFooterPresenter } from "./logic/useMainPageFooterPresenter";
 import styles from "./MainPageFooter.module.css";
-import { useMainPageFooterPresenter } from "./useMainPageFooterPresenter";
 
 export const MainPageFooter = () => {
 	const { dataSource } = useMainPageFooterPresenter();
